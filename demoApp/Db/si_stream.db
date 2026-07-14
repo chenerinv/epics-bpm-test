@@ -1,22 +1,12 @@
 # Database for simpleInstrument.py
 
-record(ao, "SI:Volt")
+record(waveform, "SI:ID")
 {
-  field(DTYP, "stream")
-  field(OUT,  "@si.proto setVolt SI")
-  field(EGU, "V")
-  field(PREC, "2")
-  field(DRVL, "-10")
-  field(DRVH, "10")
-}
-
-record(ai, "SI:Amp")
-{
-  field(DTYP, "stream")
-  field(INP,  "@si.proto getCurr SI")
   field(SCAN, "1 second")
-  field(EGU, "A")
-  field(PREC, "2")
+  field(FTVL, "CHAR") # field type of value
+  field(NELM, "100")
+  field(DTYP, "stream")
+  field(INP,  "@si.proto getID SI")
 }
 
 record(bo, "SI:Control")
@@ -37,48 +27,125 @@ record(bi, "SI:Status")
   field(ONAM, "On")
 }
 
-record(calc, "SI:Power")
+# shouldn't we get the corrector readback? 
+# ig it's not strictly necessary if we apply just an adjustment to the current value.
+
+# will need to adjust Hcorr & Vcorr to do closed loop stuff later
+
+record(ao, "SI:Hcorr")
+{
+  field(DESC, "H Corrector Current")
+  field(DTYP, "stream")
+  field(OUT, "@si.proto setHcorr SI")
+  field(EGU, "A")
+  field(PREC, "3")
+  field(DRVL, "-10")
+  field(DRVH, "10")
+}
+
+record(ao, "SI:Vcorr")
+{
+  field(DESC, "H Corrector Current")
+  field(DTYP, "stream")
+  field(OUT, "@si.proto setVcorr SI")
+  field(EGU, "A")
+  field(PREC, "3")
+  field(DRVL, "-10")
+  field(DRVH, "10")
+}
+
+record(ai, "SI:BPMx0")
 {
   field(SCAN, "1 second")
-  field(INPA, "SI:Volt CP MS")
-  field(INPB, "SI:Amp CP MS")
-  field(CALC, "A*B")
+  field(DTYP, "stream")
+  field(INP,  "@si.proto bpmx0 SI")
+  field(PREC, "2")
+  field(EGU, "a.u.")
+}
+
+record(ai, "SI:BPMx1")
+{
+  field(DTYP, "stream")
+  field(INP,  "@si.proto bpmx1 SI")
+  field(PREC, "2")
+  field(SCAN, "I/O Intr")
+  field(EGU, "a.u.")
+}
+
+record(ai, "SI:BPMy0")
+{
+  field(DTYP, "stream")
+  field(INP,  "@si.proto bpmy0 SI")
+  field(PREC, "2")
+  field(SCAN, "I/O Intr")
+  field(EGU, "a.u.")
+}
+
+record(ai, "SI:BPMy1")
+{
+  field(DTYP, "stream")
+  field(INP,  "@si.proto bpmy1 SI")
+  field(PREC, "2")
+  field(SCAN, "I/O Intr")
+  field(EGU, "a.u.")
+}
+
+record(calc, "SI:Xpos")
+{
+  field(SCAN, "1 second")
+  field(INPA, "SI:BPMx0 CP MS")
+  field(INPB, "SI:BPMx1 CP MS")
+  field(CALC, "(B-A)/(B+A)")
   field(EGU, "W")
   field(PREC, "2")
 }
 
-record(waveform, "SI:ID")
+record(calc, "SI:Ypos")
 {
   field(SCAN, "1 second")
-  field(FTVL, "CHAR") # field type of value
-  field(NELM, "100")
-  field(DTYP, "stream")
-  field(INP,  "@si.proto devInfo SI")
+  field(INPA, "SI:BPMy0 CP MS")
+  field(INPB, "SI:BPMy1 CP MS")
+  field(CALC, "(B-A)/(B+A)")
+  field(EGU, "W")
+  field(PREC, "2")
 }
 
-record(ai, "SI:Load1")
+record(calc, "SI:Int")
 {
   field(SCAN, "1 second")
-  field(DTYP, "stream")
-  field(INP,  "@si.proto cpuLoad1 SI")
+  field(INPA, "SI:BPMx0 CP MS")
+  field(INPB, "SI:BPMx1 CP MS")
+  field(INPC, "SI:BPMy0 CP MS")
+  field(INPD, "SI:BPMy1 CP MS")
+  field(CALC, "(A+B+C+D)/4")
+  field(EGU, "W")
   field(PREC, "2")
-  field(EGU, "%")
 }
 
-record(ai, "SI:Load2")
-{
-  field(DTYP, "stream")
-  field(INP,  "@si.proto cpuLoad2 SI")
-  field(PREC, "2")
-  field(SCAN, "I/O Intr")
-  field(EGU, "%")
-}
 
-record(ai, "SI:Load3")
-{
-  field(DTYP, "stream")
-  field(INP,  "@si.proto cpuLoad3 SI")
-  field(PREC, "2")
-  field(SCAN, "I/O Intr")
-  field(EGU, "%")
-}
+
+
+
+
+# references
+
+# record(ao, "SI:Volt")
+# {
+#   field(DTYP, "stream")
+#   field(OUT,  "@si.proto setVolt SI")
+#   field(EGU, "V")
+#   field(PREC, "2")
+#   field(DRVL, "-10")
+#   field(DRVH, "10")
+# }
+
+# record(ai, "SI:Amp")
+# {
+#   field(DTYP, "stream")
+#   field(INP,  "@si.proto getCurr SI")
+#   field(SCAN, "1 second")
+#   field(EGU, "A")
+#   field(PREC, "2")
+# }
+
+

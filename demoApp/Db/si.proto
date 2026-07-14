@@ -5,63 +5,54 @@ InTerminator = CR LF;
 ReplyTimeout = 10000;
 ReadTimeout = 10000;
 
-
-getVolt
+getID
 {
-  out "VOLTS?";
-  in "VOLTS %f";
+  out "*IDN?"; 
+  in "%#s";
 }
 
-setVolt
+getOn # for electron gun
 {
-  out "VOLTS %f";
-  @init
-  {
-    getVolt;
-  }
-}
-
-getCurr
-{
-  out "CURR?";
-  in "CURR %f";
-}
-
-# edits by me after here
-
-getOn
-{
-  out "ON?";
-  in "ON %d";
+  out "BEAM?";
+  in "%d";
 }
 
 setOn
 {
-  out "ON %d";
+  out "BEAM %s"; # TODO need to refactor so the 0/1 that is returned becomes a ON and OFF
   @init
   {
     getOn;
   }
 }
 
-devInfo
+setHcorr
 {
-  out "*IDN?"; 
-  in "%#s";
+  out "HCORR %f"; 
 }
 
-cpuLoad1
+setVcorr
 {
-  out "LOAD?"; 
-  in "LOAD %f %*f %*f";
+  out "VCORR %f"; 
 }
 
-cpuLoad2
+bpmx0
 {
-  in "LOAD %*f %f %*f";
+  out "BUTTONS?"; 
+  in "%f,%*f,%*f,%*f";
 }
 
-cpuLoad3
+bpmx1
 {
-  in "LOAD %*f %*f %f";
+  in "%*f,%f,%*f,%*f";
+}
+
+bpmy0
+{
+  in "%*f,%*f,%f,%*f";
+}
+
+bpmy1
+{
+  in "%*f,%*f,%*f,%f";
 }
