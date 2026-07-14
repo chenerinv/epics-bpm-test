@@ -1,0 +1,67 @@
+# Stream Protocol file for simpleInstrument.py
+
+Terminator = CR LF;
+InTerminator = CR LF;
+ReplyTimeout = 10000;
+ReadTimeout = 10000;
+
+
+getVolt
+{
+  out "VOLTS?";
+  in "VOLTS %f";
+}
+
+setVolt
+{
+  out "VOLTS %f";
+  @init
+  {
+    getVolt;
+  }
+}
+
+getCurr
+{
+  out "CURR?";
+  in "CURR %f";
+}
+
+# edits by me after here
+
+getOn
+{
+  out "ON?";
+  in "ON %d";
+}
+
+setOn
+{
+  out "ON %d";
+  @init
+  {
+    getOn;
+  }
+}
+
+devInfo
+{
+  out "*IDN?"; 
+  in "%#s";
+}
+
+cpuLoad1
+{
+  out "LOAD?"; 
+  in "LOAD %f %*f %*f";
+}
+
+cpuLoad2
+{
+  in "LOAD %*f %f %*f";
+}
+
+cpuLoad3
+{
+  in "LOAD %*f %*f %f";
+}
