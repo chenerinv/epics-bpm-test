@@ -41,6 +41,9 @@ record(ao, "SI:Hcorr")
   field(PREC, "3")
   field(DRVL, "-10")
   field(DRVH, "10")
+  field(PINI, "YES")
+  field(DOL, "0")
+  field(TPRO, "1")
 }
 
 record(ao, "SI:Vcorr")
@@ -52,6 +55,8 @@ record(ao, "SI:Vcorr")
   field(PREC, "3")
   field(DRVL, "-10")
   field(DRVH, "10")
+  field(PINI, "YES")
+  field(DOL, "0")
 }
 
 record(ai, "SI:BPMx0")
@@ -96,7 +101,7 @@ record(calc, "SI:Xpos")
   field(INPA, "SI:BPMx0 CP MS")
   field(INPB, "SI:BPMx1 CP MS")
   field(CALC, "(B-A)/(B+A)")
-  field(EGU, "W")
+  field(EGU, "mm")
   field(PREC, "2")
 }
 
@@ -106,7 +111,7 @@ record(calc, "SI:Ypos")
   field(INPA, "SI:BPMy0 CP MS")
   field(INPB, "SI:BPMy1 CP MS")
   field(CALC, "(B-A)/(B+A)")
-  field(EGU, "W")
+  field(EGU, "mm")
   field(PREC, "2")
 }
 
@@ -118,7 +123,7 @@ record(calc, "SI:Int")
   field(INPC, "SI:BPMy0 CP MS")
   field(INPD, "SI:BPMy1 CP MS")
   field(CALC, "(A+B+C+D)/4")
-  field(EGU, "W")
+  field(EGU, "a.u.")
   field(PREC, "2")
 }
 
