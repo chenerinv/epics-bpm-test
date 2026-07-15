@@ -67,7 +67,7 @@
       <name>SI:Xpos</name>
       <axis>0</axis>
       <color>
-        <red>255</red>
+        <red>153</red>
         <green>0</green>
         <blue>0</blue>
       </color>
@@ -88,8 +88,8 @@
       <axis>0</axis>
       <color>
         <red>0</red>
-        <green>255</green>
-        <blue>0</blue>
+        <green>26</green>
+        <blue>128</blue>
       </color>
       <trace_type>AREA</trace_type>
       <linewidth>2</linewidth>
@@ -107,9 +107,9 @@
       <name>SI:Hcorr</name>
       <axis>1</axis>
       <color>
-        <red>0</red>
-        <green>0</green>
-        <blue>255</blue>
+        <red>230</red>
+        <green>77</green>
+        <blue>77</blue>
       </color>
       <trace_type>AREA</trace_type>
       <linewidth>2</linewidth>
@@ -127,9 +127,9 @@
       <name>SI:Vcorr</name>
       <axis>1</axis>
       <color>
-        <red>255</red>
-        <green>127</green>
-        <blue>0</blue>
+        <red>77</red>
+        <green>102</green>
+        <blue>204</blue>
       </color>
       <trace_type>AREA</trace_type>
       <linewidth>2</linewidth>

@@ -29,6 +29,7 @@ asynSetTraceIOMask("SI", 0, 6)
 ## Load record instances
 cd ${TOP}
 dbLoadRecords("db/si_stream.db")
+dbLoadRecords("db/control.db")
 
 iocInit()
 

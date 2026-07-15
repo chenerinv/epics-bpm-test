@@ -1,0 +1,131 @@
+### control for PID loop
+
+record(ao, "SI:Hsetpoint")
+{
+    field(DESC, "Horizontal Position Setpoint")
+    field(EGU, "mm")
+    field(HOPR, "1")
+    field(LOPR, "-1")
+    field(DRVL, "-1")
+    field(DRVH, "1")
+    field(HIHI, "0.9")
+    field(HIGH, "0.8")
+    field(LOW , "-0.8")
+    field(LOLO, "-0.9")
+    field(PREC, "2")
+    field(DOL,  "0")
+    field(PINI, "YES")
+}
+record(ao, "SI:Vsetpoint")
+{
+    field(DESC, "Vertical Position Setpoint")
+    field(EGU, "mm")
+    field(HOPR, "1")
+    field(LOPR, "-1")
+    field(DRVL, "-1")
+    field(DRVH, "1")
+    field(HIHI, "0.9")
+    field(HIGH, "0.8")
+    field(LOW , "-0.8")
+    field(LOLO, "-0.9")
+    field(PREC, "2")
+    field(DOL,  "0")
+    field(PINI, "YES")
+}
+
+# Position error
+# A - current position
+# B - setpoint
+record(calc, "SI:Herror")
+{
+    field(DESC, "Horizontal Position Error")
+    field(SCAN, ".5 second")
+    field(INPA, "SI:Xpos")
+    field(INPB, "SI:Hsetpoint MS")
+    field(CALC, "B-A")
+    field(PREC, "2")
+    field(FLNK, "SI:Hintegral")
+}
+record(calc, "SI:Verror")
+{
+    field(DESC, "Vertical Position Error")
+    field(SCAN, ".5 second")
+    field(INPA, "SI:Ypos")
+    field(INPB, "SI:Vsetpoint MS")
+    field(CALC, "B-A")
+    field(PREC, "2")
+    field(FLNK, "SI:Vintegral")
+}
+
+# Integrate error (A) but assert that
+# it stays within limits (C)
+record(calc, "SI:Hintegral")
+{
+    field(DESC, "Integrate Error for PID")
+    field(PREC, "3")
+    field(INPA, "SI:Herror PP MS")
+    field(INPB, "SI:Hintegral")
+    field(INPC, "0.5")
+    field(CALC, "(B+A>C)?C:(B+A<-C)?(-C):(B+A)")
+    field(FLNK, "SI:HPID")
+}
+record(calc, "SI:Vintegral")
+{
+    field(DESC, "Integrate Error for PID")
+    field(PREC, "3")
+    field(INPA, "SI:Verror PP MS")
+    field(INPB, "SI:Vintegral")
+    field(INPC, "0.5")
+    field(CALC, "(B+A>C)?C:(B+A<-C)?(-C):(B+A)")
+    field(FLNK, "SI:VPID")
+}
+
+# Every second, calculate new heater voltage via PID (PI)
+# A - Kp
+# B - error
+# C - Ki
+# D - error integral
+record(calc, "SI:HPID")
+{
+    field(DESC, "H PID")
+    field(PREC, "3")
+    field(LOPR, "-1000")
+    field(HOPR, "1000")
+    field(HIHI, "900")
+    field(HIGH, "500")
+    field(LOW , "-500")
+    field(LOLO, "-900")
+    field(INPA, "1")
+    field(INPB, "SI:Herror MS")
+    field(INPC, "1")
+    field(INPD, "SI:Hintegral MS")
+    field(CALC, "A*B+C*D")
+}
+record(calc, "SI:VPID")
+{
+    field(DESC, "V PID")
+    field(PREC, "3")
+    field(LOPR, "-1000")
+    field(HOPR, "1000")
+    field(HIHI, "900")
+    field(HIGH, "500")
+    field(LOW , "-500")
+    field(LOLO, "-900")
+    field(INPA, "1")
+    field(INPB, "SI:Verror MS")
+    field(INPC, "1")
+    field(INPD, "SI:Vintegral MS")
+    field(CALC, "A*B+C*D")
+}
+
+# patch corr to work with PID loop
+record(ao, "SI:Hcorr")
+{
+  field(DOL, "SI:HPID CP MS")
+  field(OMSL,"closed_loop")
+}
+record(ao, "SI:Vcorr")
+{
+  field(DOL, "SI:VPID CP MS")
+  field(OMSL,"closed_loop")
+}
