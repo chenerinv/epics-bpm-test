@@ -2,6 +2,7 @@
 
 record(waveform, "SI:ID")
 {
+  field(DESC, "Device ID")
   field(SCAN, "1 second")
   field(FTVL, "CHAR") # field type of value
   field(NELM, "100")
@@ -9,17 +10,21 @@ record(waveform, "SI:ID")
   field(INP,  "@si.proto getID SI")
 }
 
-record(bo, "SI:Control")
+record(mbbo, "SI:Control")
 {
+  field(DESC, "Beam Control")
   field(SCAN, "1 second")
   field(DTYP, "stream")
   field(OUT, "@si.proto setOn SI")
-  field(ZNAM, "Off")
-  field(ONAM, "On")
+  field(ZRVL, "0")
+  field(ZRST, "OFF")
+  field(ONVL, "1")
+  field(ONST, "ON")
 }
 
 record(bi, "SI:Status")
 {
+  field(DESC, "Beam Status")
   field(SCAN, ".5 second")
   field(DTYP, "stream")
   field(INP, "@si.proto getOn SI")
@@ -32,6 +37,10 @@ record(ao, "SI:Hcorr")
   field(DESC, "H Corrector Current")
   field(DTYP, "stream")
   field(OUT, "@si.proto setHcorr SI")
+  field(HIGH, "9")
+  field(HSV, "MINOR")
+  field(LOW , "-9")
+  field(LSV, "MINOR")
   field(EGU, "A")
   field(PREC, "3")
   field(DRVL, "-10")
@@ -46,6 +55,10 @@ record(ao, "SI:Vcorr")
   field(DESC, "H Corrector Current")
   field(DTYP, "stream")
   field(OUT, "@si.proto setVcorr SI")
+  field(HIGH, "9")
+  field(HSV, "MINOR")
+  field(LOW , "-9")
+  field(LSV, "MINOR")
   field(EGU, "A")
   field(PREC, "3")
   field(DRVL, "-10")
@@ -58,60 +71,47 @@ record(ao, "SI:Vcorr")
 
 record(ai, "SI:BPMx0")
 {
+  field(DESC, "BPM -x Signal")
   field(SCAN, ".1 second")
   field(DTYP, "stream")
   field(INP,  "@si.proto bpmx0 SI")
-  field(PREC, "2")
+  field(PREC, "0")
   field(EGU, "a.u.")
 }
 
 record(ai, "SI:BPMx1")
 {
+  field(DESC, "BPM +x Signal")
   field(DTYP, "stream")
   field(INP,  "@si.proto bpmx1 SI")
-  field(PREC, "2")
+  field(PREC, "0")
   field(SCAN, "I/O Intr")
   field(EGU, "a.u.")
 }
 
 record(ai, "SI:BPMy0")
 {
+  field(DESC, "BPM -y Signal")
   field(DTYP, "stream")
   field(INP,  "@si.proto bpmy0 SI")
-  field(PREC, "2")
+  field(PREC, "0")
   field(SCAN, "I/O Intr")
   field(EGU, "a.u.")
 }
 
 record(ai, "SI:BPMy1")
 {
+  field(DESC, "BPM +y Signal")
   field(DTYP, "stream")
   field(INP,  "@si.proto bpmy1 SI")
-  field(PREC, "2")
+  field(PREC, "0")
   field(SCAN, "I/O Intr")
   field(EGU, "a.u.")
 }
 
-record(calc, "SI:Xpos")
-{
-  field(INPA, "SI:BPMx0 CP MS")
-  field(INPB, "SI:BPMx1 CP MS")
-  field(CALC, "(B-A)/(B+A)")
-  field(EGU, "mm")
-  field(PREC, "2")
-}
-
-record(calc, "SI:Ypos")
-{
-  field(INPA, "SI:BPMy0 CP MS")
-  field(INPB, "SI:BPMy1 CP MS")
-  field(CALC, "(B-A)/(B+A)")
-  field(EGU, "mm")
-  field(PREC, "2")
-}
-
 record(calc, "SI:Int")
 {
+  field(DESC, "BPM Intensity")
   field(INPA, "SI:BPMx0 CP MS")
   field(INPB, "SI:BPMx1 CP MS")
   field(INPC, "SI:BPMy0 CP MS")
@@ -122,3 +122,32 @@ record(calc, "SI:Int")
 }
 
 
+record(calc, "SI:Xpos")
+{
+  field(DESC, "BPM Horizontal Position")
+  field(INPA, "SI:BPMx0 CP MS")
+  field(INPB, "SI:BPMx1 CP MS")
+  field(INPC, "SI:Status CP")
+  field(CALC, "C>0?(B-A)/(B+A):0")
+  field(HIGH, "0.8")
+  field(HSV, "MINOR")
+  field(LOW , "-0.8")
+  field(LSV, "MINOR")
+  field(EGU, "mm")
+  field(PREC, "3")
+}
+
+record(calc, "SI:Ypos")
+{
+  field(DESC, "BPM Vertical Position")
+  field(INPA, "SI:BPMy0 CP MS")
+  field(INPB, "SI:BPMy1 CP MS")
+  field(INPC, "SI:Status CP")
+  field(CALC, "C>0?(B-A)/(B+A):0")
+  field(HIGH, "0.8")
+  field(HSV, "MINOR")
+  field(LOW , "-0.8")
+  field(LSV, "MINOR")
+  field(EGU, "mm")
+  field(PREC, "3")
+}

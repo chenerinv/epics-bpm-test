@@ -12,6 +12,7 @@ include $(TOP)/configure/CONFIG
 # databases, templates, substitutions like this
 DB += si_stream.db
 DB += control.db
+DB += noise.db
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

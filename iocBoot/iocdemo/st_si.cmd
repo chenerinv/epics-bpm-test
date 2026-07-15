@@ -30,6 +30,7 @@ asynSetTraceIOMask("SI", 0, 6)
 cd ${TOP}
 dbLoadRecords("db/si_stream.db")
 dbLoadRecords("db/control.db")
+dbLoadRecords("db/noise.db")
 
 iocInit()
 
