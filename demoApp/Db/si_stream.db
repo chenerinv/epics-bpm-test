@@ -43,7 +43,6 @@ record(ao, "SI:Hcorr")
   field(DRVH, "10")
   field(PINI, "YES")
   field(DOL, "0")
-  field(TPRO, "1")
 }
 
 record(ao, "SI:Vcorr")
@@ -61,7 +60,7 @@ record(ao, "SI:Vcorr")
 
 record(ai, "SI:BPMx0")
 {
-  field(SCAN, "1 second")
+  field(SCAN, ".1 second")
   field(DTYP, "stream")
   field(INP,  "@si.proto bpmx0 SI")
   field(PREC, "2")
@@ -97,7 +96,6 @@ record(ai, "SI:BPMy1")
 
 record(calc, "SI:Xpos")
 {
-  field(SCAN, "1 second")
   field(INPA, "SI:BPMx0 CP MS")
   field(INPB, "SI:BPMx1 CP MS")
   field(CALC, "(B-A)/(B+A)")
@@ -107,7 +105,6 @@ record(calc, "SI:Xpos")
 
 record(calc, "SI:Ypos")
 {
-  field(SCAN, "1 second")
   field(INPA, "SI:BPMy0 CP MS")
   field(INPB, "SI:BPMy1 CP MS")
   field(CALC, "(B-A)/(B+A)")
@@ -117,7 +114,6 @@ record(calc, "SI:Ypos")
 
 record(calc, "SI:Int")
 {
-  field(SCAN, "1 second")
   field(INPA, "SI:BPMx0 CP MS")
   field(INPB, "SI:BPMx1 CP MS")
   field(INPC, "SI:BPMy0 CP MS")
