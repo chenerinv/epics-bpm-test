@@ -34,8 +34,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-3.6</min>
-      <max>1.2</max>
+      <min>-2.16</min>
+      <max>0.48</max>
       <grid>false</grid>
       <autoscale>false</autoscale>
       <log_scale>false</log_scale>
@@ -51,7 +51,41 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-10.0</min>
+      <min>-2.73</min>
+      <max>2.5100000000000002</max>
+      <grid>false</grid>
+      <autoscale>false</autoscale>
+      <log_scale>false</log_scale>
+    </axis>
+    <axis>
+      <visible>true</visible>
+      <name>Value 3</name>
+      <use_axis_name>false</use_axis_name>
+      <use_trace_names>true</use_trace_names>
+      <right>false</right>
+      <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+      </color>
+      <min>-0.161</min>
+      <max>0.801</max>
+      <grid>false</grid>
+      <autoscale>false</autoscale>
+      <log_scale>false</log_scale>
+    </axis>
+    <axis>
+      <visible>false</visible>
+      <name>Value 4</name>
+      <use_axis_name>false</use_axis_name>
+      <use_trace_names>true</use_trace_names>
+      <right>false</right>
+      <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+      </color>
+      <min>0.0</min>
       <max>10.0</max>
       <grid>false</grid>
       <autoscale>false</autoscale>
@@ -130,6 +164,46 @@
         <red>77</red>
         <green>102</green>
         <blue>204</blue>
+      </color>
+      <trace_type>AREA</trace_type>
+      <linewidth>2</linewidth>
+      <line_style>SOLID</line_style>
+      <point_type>NONE</point_type>
+      <point_size>2</point_size>
+      <waveform_index>0</waveform_index>
+      <period>0.0</period>
+      <ring_size>5000</ring_size>
+      <request>OPTIMIZED</request>
+    </pv>
+    <pv>
+      <display_name>SI:Hnoise</display_name>
+      <visible>true</visible>
+      <name>SI:Hnoise</name>
+      <axis>2</axis>
+      <color>
+        <red>255</red>
+        <green>179</green>
+        <blue>179</blue>
+      </color>
+      <trace_type>AREA</trace_type>
+      <linewidth>2</linewidth>
+      <line_style>SOLID</line_style>
+      <point_type>NONE</point_type>
+      <point_size>2</point_size>
+      <waveform_index>0</waveform_index>
+      <period>0.0</period>
+      <ring_size>5000</ring_size>
+      <request>OPTIMIZED</request>
+    </pv>
+    <pv>
+      <display_name>SI:Vnoise</display_name>
+      <visible>true</visible>
+      <name>SI:Vnoise</name>
+      <axis>2</axis>
+      <color>
+        <red>179</red>
+        <green>204</green>
+        <blue>255</blue>
       </color>
       <trace_type>AREA</trace_type>
       <linewidth>2</linewidth>

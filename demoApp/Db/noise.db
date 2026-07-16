@@ -1,5 +1,5 @@
 
-record(bo, "SI:Hreset")
+record(bo, "SI:exreset")
 {
     field(DESC, "Extrema Measurement Control")   
     field(PINI, "YES")
@@ -15,7 +15,7 @@ record(calc, "SI:Hmax")
     field(PREC, "3")
     field(INPA, "SI:Xpos PP MS")
     field(INPB, "SI:Hmax")
-    field(INPC, "SI:Hreset CP")
+    field(INPC, "SI:exreset CP")
     field(CALC, "(C<1)?(-1):(A>B)?A:(B)")
 }
 record(calc, "SI:Hmin")
@@ -26,7 +26,7 @@ record(calc, "SI:Hmin")
     field(PREC, "3")
     field(INPA, "SI:Xpos PP MS")
     field(INPB, "SI:Hmin")
-    field(INPC, "SI:Hreset CP")
+    field(INPC, "SI:exreset CP")
     field(CALC, "(C<1)?(1):(A<B)?(A):(B)")
 }
 record(calc, "SI:Hnoise")
@@ -37,6 +37,41 @@ record(calc, "SI:Hnoise")
     field(PREC, "3")
     field(INPA, "SI:Hmax PP MS")
     field(INPB, "SI:Hmin PP MS")
-    field(INPC, "SI:Hreset CP")
+    field(INPC, "SI:exreset CP")
+    field(CALC, "(C<1)?(0):A-B")
+}
+
+
+record(calc, "SI:Vmax")
+{  
+    field(SCAN, "1 second")
+    field(DESC, "Vertical Recent Max Position")
+    field(EGU, "mm")
+    field(PREC, "3")
+    field(INPA, "SI:Ypos PP MS")
+    field(INPB, "SI:Vmax")
+    field(INPC, "SI:exreset CP")
+    field(CALC, "(C<1)?(-1):(A>B)?A:(B)")
+}
+record(calc, "SI:Vmin")
+{
+    field(SCAN, "1 second")
+    field(DESC, "Vertical Recent Min Position")
+    field(EGU, "mm")
+    field(PREC, "3")
+    field(INPA, "SI:Ypos PP MS")
+    field(INPB, "SI:Vmin")
+    field(INPC, "SI:exreset CP")
+    field(CALC, "(C<1)?(1):(A<B)?(A):(B)")
+}
+record(calc, "SI:Vnoise")
+{
+    field(SCAN, "1 second")
+    field(DESC, "Vertical Recent Noise")
+    field(EGU, "mm")
+    field(PREC, "3")
+    field(INPA, "SI:Vmax PP MS")
+    field(INPB, "SI:Vmin PP MS")
+    field(INPC, "SI:exreset CP")
     field(CALC, "(C<1)?(0):A-B")
 }
